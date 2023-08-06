@@ -1,7 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Models\Post;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PostController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,16 +31,10 @@ Route::get('/about', function () {
 
 
 
-Route::get('/posts', function () {
-   
-    return view("posts", [
-        "title" => "posts",
-        "posts" => Post::all()
-       
-    ]);
-});
+Route::get('/posts', [PostController::class, 'index']);
+Route::get('/posts/{slug}', [PostController::class, 'show']);
 
-Route::get('/posts/{slug}', function ($slug) {
+// Route::get('/posts/{slug}', function ($slug) {
     // $blog_post = [
     //     [
     //         "title" => "judul post 1",
@@ -63,8 +58,6 @@ Route::get('/posts/{slug}', function ($slug) {
     //         $new_post = $post;
     //     }
     // }
-    return view("post", [
-        "title" => "Single post",
-        "post" => Post::find($slug)
-    ]);
-});
+    
+// });
+
